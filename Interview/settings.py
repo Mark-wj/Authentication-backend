@@ -2,7 +2,13 @@ import os
 import dj_database_url
 from pathlib import Path
 import environ  
+import sys
+from dotenv import load_dotenv
 
+if sys.version_info < (3, 9):
+      from backports import zoneinfo
+else:
+      import zoneinfo
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,6 +18,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+load_dotenv()
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
